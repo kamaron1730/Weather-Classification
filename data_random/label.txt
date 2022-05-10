@@ -1,0 +1,8 @@
+1.jpg cloudy
+2.png sunny
+3.jpg cloudy
+4.jpg haze
+5.jpg snow
+6.jpg thunder
+7.jpg sunny
+8.jpg rainy
