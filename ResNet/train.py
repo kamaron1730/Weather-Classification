@@ -15,7 +15,6 @@ from ResNet.utils import train_one_epoch, evaluate, plot_class_preds
 import argparse
 
 def main(args):
-    n_epochs = 10
     # 图片大小
     resize = 224
     # 初始化验证机的最小误差为正无穷
@@ -26,7 +25,7 @@ def main(args):
     print('Start Tensorboard with "tensorboard --logdir=runs", view at http://localhost:6006/')
     # 实例化SummaryWriter对象
     tb_writer = SummaryWriter(log_dir="runs/weather_experiment")
-    print("111")
+   
     if os.path.exists("./weights") is False:
         os.makedirs("./weights")
     data_transform = {
@@ -44,9 +43,7 @@ def main(args):
     valloader = torchvision.datasets.ImageFolder(root="../data_set/val",
                                                  transform=data_transform["val"])
     batch_size = args.batch_size
-    # 计算使用num_workers的数量
-    nw = min([os.cpu_count(), batch_size if batch_size > 1 else 0, 8])  # number of workers
-    print('Using {} dataloader workers every process'.format(nw))
+ 
     train_set = DataLoader(trainloader, batch_size=batch_size, shuffle=True, num_workers=0)
     val_set = DataLoader(valloader, batch_size=batch_size, shuffle=False, num_workers=0)
     net = resnet34(num_classes=args.num_classes).to(device)
@@ -131,12 +128,11 @@ if __name__ == '__main__':
     parser.add_argument('--lrf', type=float, default=0.1)
 
     # 数据集所在根目录
-    # https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz
+   
     img_root = "../data_set/weather_classification"
     parser.add_argument('--data-path', type=str, default=img_root)
 
-    # resnet34 官方权重下载地址
-    # https://download.pytorch.org/models/resnet34-333f7ec4.pth
+  
     parser.add_argument('--weights', type=str, default='resNet34.pth',
                         help='initial weights path')
     parser.add_argument('--freeze-layers', type=bool, default=False)
