@@ -69,13 +69,7 @@ def main(args):
             # 除最后的全连接层外，其他权重全部冻结
             if "fc" not in name:
                 para.requires_grad_(False)
-    # model_weight_path = "../model/resnet34-pre.pth"
-    # net.load_state_dict(torch.load(model_weight_path,map_location=device))
-    #
-    # inchannel = net.fc.in_features
-    # net.fc = nn.Linear(inchannel,6)
-    # 定义损失函数和梯度下降优化器
-    # 损失函数为交叉熵损失函数
+  
 
     criterion = nn.CrossEntropyLoss()
 
@@ -151,71 +145,6 @@ if __name__ == '__main__':
     opt = parser.parse_args()
 
     main(opt)
-#     train_loss_hist = []
-#     val_loss_hist = []
-#     val_acc_hist = []
-#     for epoch in range(n_epochs):
-#         # 训练
-#         net.train()
-#         running_loss = 0.0
-#         t1 = time.perf_counter()
-#         # train_bar =tqdm(train_set,file=sys.stdout)
-#         for i, data in enumerate(train_set):
-#             images, labels = data
-#             outputs = net(images.to(device))
-#             loss = criterion(outputs, labels.to(device))
-#             optimizer.zero_grad()
-#             loss.backward()
-#             optimizer.step()
-#             running_loss += loss.item()
-#             # print train process
-#             rate = (i + 1) / len(train_set)
-#             a = "*" * int(rate * 50)
-#             b = "." * int((1 - rate) * 50)
-#             # train_bar.desc = "train epoch[{}/{}] loss:{:.3f}".format(epoch+1,n_epochs,loss)
-#             print("\rtrain loss : {:^3.0f}%[{}->{}]{:.3f}".format(int(rate * 100), a, b, loss), end="")
-#         print()
-#         print(time.perf_counter() - t1)
-#         # 验证
-#         net.eval()
-#         acc = 0.0
-#         valrunning_loss = 0.0
-#         with torch.no_grad():
-#             for val_data in val_set:
-#                 val_images, val_labels = val_data
-#                 val_outputs = net(val_images.to(device))
-#                 val_loss = criterion(val_outputs, val_labels.to(device))
-#                 valrunning_loss += val_loss.item()
-#                 _, predicted = torch.max(val_outputs, 1)
-#                 acc += torch.eq(predicted, val_labels.to(device)).sum().item()
-#         val_accurate = acc / len(val_set.dataset)
-#         print('[epoch %d] train_loss: %.3f  val_loss: %.3f val_accuracy: %.3f' % (
-#         epoch + 1, running_loss / i, valrunning_loss / len(val_set), val_accurate))
-#         if val_accurate > best_acc:
-#             best_acc = val_accurate
-#             torch.save(net.state_dict(), 'model/modelResnet1.pt')
-#         train_loss_hist.append(running_loss / len(train_set))
-#         val_loss_hist.append(valrunning_loss / len(val_set))
-#         val_acc_hist.append((val_accurate))
-#
-#     print('Finished Training')
-#
-#     # 图像显示
-#     # plt.figure()
-#     # x,=plt.plot(train_loss_hist)
-#     # y,=plt.plot(val_loss_hist)
-#     # plt.legend([x,y],['train loss','val loss'])
-#     # plt.title('Train/Val loss')
-#     # plt.xlabel('#mini batch * 250')
-#     # plt.ylabel('Loss')
-#     plt.plot(train_loss_hist, label='train loss')
-#     plt.plot(val_loss_hist, label='val loss')
-#     plt.plot(val_acc_hist, label='val acc')
-#     plt.title("ResNet learning rate=0.001")
-#     plt.legend()
-#     plt.savefig('image/Resnet1.jpg')
-#     plt.show()
-#
-#
-# if __name__ == '__main__':
-#     main()
+
+
+
