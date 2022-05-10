@@ -2,8 +2,7 @@ import torch
 import torch.nn as nn
 import torchvision
 from torchvision import transforms
-# import torchvision.models.resnet
-from MobileNet.model_v2 import MobileNetV2
+from MobileNet.model import MobileNetV2
 from torch.utils.data import DataLoader
 import math
 import torch.optim.lr_scheduler as lr_scheduler
@@ -114,14 +113,6 @@ def main(args):
                                  figure=fig,
                                  global_step=epoch)
 
-        # # add conv1 weights into tensorboard
-        # tb_writer.add_histogram(tag="conv1",
-        #                         values=net.conv1.weight,
-        #                         global_step=epoch)
-        # tb_writer.add_histogram(tag="layer1/block0/conv1",
-        #                         values=net.layer1[0].conv1.weight,
-        #                         global_step=epoch)
-        # save weights
         if acc > best_acc:
             best_acc = acc
             torch.save(net.state_dict(), "./weights/modelMobileNet.pth")
@@ -135,7 +126,7 @@ if __name__ == '__main__':
     parser.add_argument('--lrf', type=float, default=0.1)
 
     # 数据集所在根目录
-    # https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz
+    
     img_root = "../data_set/weather_classification"
     parser.add_argument('--data-path', type=str, default=img_root)
 
