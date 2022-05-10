@@ -124,8 +124,7 @@ if __name__ == '__main__':
     img_root = "../data_set/weather_classification"
     parser.add_argument('--data-path', type=str, default=img_root)
 
-    # resnet34 官方权重下载地址
-    # https://download.pytorch.org/models/resnet34-333f7ec4.pth
+   
     parser.add_argument('--weights', type=str, default='alexnet.pth',
                         help='initial weights path')
     parser.add_argument('--freeze-layers', type=bool, default=False)
